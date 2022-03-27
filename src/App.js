@@ -1,10 +1,9 @@
-import MainButton from "./Components/MainButton/MainButton";
+import Navbar from "./Components/Navbar/Navbar";
 
 function App() {
   return (
     <div className="App">
-      <MainButton text={"Create task"} />
-      <MainButton text={"AltButon"} />
+      <Navbar />
     </div>
   );
 }
