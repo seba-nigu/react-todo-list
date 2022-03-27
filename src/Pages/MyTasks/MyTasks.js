@@ -5,7 +5,7 @@ function MyTaks(props) {
   return (
     <div className="MyTasks">
       MyTaks
-      <SearchBar placeholder={"Search..."} width="200px" />
+      <SearchBar placeholder={"Search..."} width="200px" theme={props.theme} />
     </div>
   );
 }

@@ -8,12 +8,17 @@ function SearchBar(props) {
       className="SearchBar"
       style={{
         width: props.width,
+        color: props.theme.normalText,
+        borderColor: props.theme.normalText,
       }}
     >
       <input
         className="search-input"
         placeholder={props.placeholder}
         type="text"
+        style={{
+          color: props.theme.normalText,
+        }}
       />
       <Search />
     </div>
