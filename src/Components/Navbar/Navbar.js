@@ -1,26 +1,59 @@
-import { AccountCircle, WbSunnyOutlined } from "@material-ui/icons";
+import {
+  AccountCircle,
+  WbSunnyOutlined,
+  Brightness4Outlined,
+} from "@material-ui/icons";
 import React from "react";
+
 import MainButton from "../MainButton/MainButton";
 import "./style.css";
 import { lightTheme, darkTheme } from "../../themes/theme.js";
 
 function Navbar(props) {
+  let icon = (
+    <AccountCircle
+      style={{
+        cursor: "pointer",
+        fontSize: "40px",
+      }}
+      onClick={changeTheme}
+    />
+  );
   function changeTheme() {
-    if (props.theme === darkTheme) props.setTheme(lightTheme);
-    else props.setTheme(darkTheme);
+    if (props.theme === darkTheme) {
+      props.setTheme(lightTheme);
+    } else {
+      props.setTheme(darkTheme);
+    }
+  }
+
+  if (props.theme === lightTheme) {
+    icon = (
+      <WbSunnyOutlined
+        style={{
+          cursor: "pointer",
+          fontSize: "40px",
+          color: props.theme.normalText,
+        }}
+        onClick={changeTheme}
+      />
+    );
+  } else {
+    icon = (
+      <Brightness4Outlined
+        style={{
+          cursor: "pointer",
+          fontSize: "40px",
+          color: props.theme.normalText,
+        }}
+        onClick={changeTheme}
+      />
+    );
   }
 
   return (
     <div className="Navbar">
-      <div className="navbar-left-part">
-        <WbSunnyOutlined
-          style={{
-            cursor: "pointer",
-            fontSize: "40px",
-          }}
-          onClick={changeTheme}
-        />
-      </div>
+      <div className="navbar-left-part">{icon}</div>
       <div className="navbar-right-part">
         <MainButton
           text={"Create Task"}
