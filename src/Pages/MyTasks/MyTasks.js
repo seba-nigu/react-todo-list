@@ -28,6 +28,21 @@ function MyTaks(props) {
           category="Work"
           theme={props.theme}
         />
+        <TaskBox
+          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam"
+          category="Homework"
+          theme={props.theme}
+        />
+        <TaskBox
+          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam"
+          category="Homework"
+          theme={props.theme}
+        />
+        <TaskBox
+          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam"
+          category="Homework"
+          theme={props.theme}
+        />
       </div>
     </div>
   );

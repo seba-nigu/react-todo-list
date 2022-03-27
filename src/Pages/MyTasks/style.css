@@ -14,3 +14,10 @@
   width: 400px;
   justify-content: space-between;
 }
+.task-boxes {
+  width: 60%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
