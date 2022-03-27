@@ -1,0 +1,10 @@
+.TaskBox {
+  width: 200px;
+  font-family: sans-serif;
+  padding: 20px;
+  height: 150px;
+}
+
+.textbox-category {
+  text-align: end;
+}
