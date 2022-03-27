@@ -1,4 +1,5 @@
 import { useState } from "react";
+import MyTasks from "./Pages/MyTasks/MyTasks";
 import Navbar from "./Components/Navbar/Navbar";
 import { darkTheme } from "./themes/theme";
 
@@ -13,6 +14,7 @@ function App() {
       }}
     >
       <Navbar theme={theme} setTheme={setTheme} />
+      <MyTasks theme={theme} />
     </div>
   );
 }

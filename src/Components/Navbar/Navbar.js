@@ -68,7 +68,7 @@ function Navbar(props) {
           Categories
         </div>
         <div
-          className="navbar-item"
+          className="navbar-item underlined"
           style={{
             color: props.theme.normalText,
           }}

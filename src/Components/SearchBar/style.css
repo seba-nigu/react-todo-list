@@ -1,0 +1,14 @@
+.SearchBar {
+  border: 1px solid white;
+  color: white;
+  display: flex;
+  padding: 10px;
+}
+
+.search-input {
+  border: none;
+  width: 90%;
+  outline: none;
+  background: transparent;
+  color: white;
+}
