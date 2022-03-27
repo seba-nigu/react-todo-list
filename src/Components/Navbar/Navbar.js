@@ -8,6 +8,7 @@ import React from "react";
 import MainButton from "../MainButton/MainButton";
 import "./style.css";
 import { lightTheme, darkTheme } from "../../themes/theme.js";
+import { Link } from "react-router-dom";
 
 function Navbar(props) {
   let icon = (
@@ -55,26 +56,33 @@ function Navbar(props) {
     <div className="Navbar">
       <div className="navbar-left-part">{icon}</div>
       <div className="navbar-right-part">
-        <MainButton
-          text={"Create Task"}
-          backgroundColor={props.theme.mainButton}
-        />
-        <div
-          className="navbar-item"
-          style={{
-            color: props.theme.normalText,
-          }}
-        >
-          Categories
-        </div>
-        <div
-          className="navbar-item underlined"
-          style={{
-            color: props.theme.normalText,
-          }}
-        >
-          My Tasks
-        </div>
+        <Link to="/create-task" className="custom-link-router">
+          <MainButton
+            text={"Create Task"}
+            backgroundColor={props.theme.mainButton}
+          />
+        </Link>
+        <Link to="/categories" className="custom-link-router">
+          <div
+            className="navbar-item"
+            style={{
+              color: props.theme.normalText,
+            }}
+          >
+            Categories
+          </div>
+        </Link>
+        <Link to="/" className="custom-link-router">
+          <div
+            className="navbar-item underlined"
+            style={{
+              color: props.theme.normalText,
+            }}
+          >
+            My Tasks
+          </div>
+        </Link>
+
         <AccountCircle
           style={{
             fontSize: "40px",

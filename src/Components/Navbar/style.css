@@ -25,3 +25,7 @@
   text-decoration: underline;
   text-underline-offset: 10px;
 }
+
+.custom-link-router {
+  text-decoration: none;
+}
