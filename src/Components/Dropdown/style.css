@@ -1,0 +1,12 @@
+.Dropdown {
+  color: white;
+  padding: 10px;
+  border: 1px solid;
+}
+
+.dropdown-input {
+  width: 95%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
