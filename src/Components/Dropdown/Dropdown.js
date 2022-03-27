@@ -13,17 +13,19 @@ function Dropdown(props) {
       <input
         type="text"
         name="categories"
-        list="categories"
+        list={props.datalistName}
         autocomplete="on"
         className="dropdown-input"
         style={{
           color: props.theme.normalText,
         }}
       />
-      <datalist id="categories" className="dropdown-input">
-        <option>Work</option>
-        <option>Homework</option>
-      </datalist>
+      {props.datalist || (
+        <datalist id="categories" className="dropdown-input">
+          <option>Work</option>
+          <option>Homework</option>
+        </datalist>
+      )}
     </div>
   );
 }

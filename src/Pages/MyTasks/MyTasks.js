@@ -12,7 +12,7 @@ function MyTaks(props) {
           color: props.theme.normalText,
         }}
       >
-        MyTaks
+        My Tasks
       </div>
       <div className="search-area">
         <SearchBar
@@ -20,7 +20,7 @@ function MyTaks(props) {
           width="250px"
           theme={props.theme}
         />
-        <Dropdown theme={props.theme} />
+        <Dropdown theme={props.theme} datalistName={"categories"} />
       </div>
       <div className="task-boxes">
         <TaskBox

@@ -2,7 +2,7 @@ import { useState } from "react";
 import MyTasks from "./Pages/MyTasks/MyTasks";
 import Navbar from "./Components/Navbar/Navbar";
 import { darkTheme } from "./themes/theme";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreateTask from "./Pages/CreateTask/CreateTask";
 
 function App() {

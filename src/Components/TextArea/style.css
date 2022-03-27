@@ -1,0 +1,15 @@
+.TextArea {
+  border: 1px solid white;
+  color: white;
+  display: flex;
+  padding: 10px;
+}
+
+.textarea-input {
+  border: none;
+  width: 90%;
+  outline: none;
+  background: transparent;
+  color: white;
+  resize: vertical;
+}

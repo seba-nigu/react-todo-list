@@ -10,6 +10,7 @@ function SearchBar(props) {
         width: props.width,
         color: props.theme.normalText,
         borderColor: props.theme.normalText,
+        height: props.height,
       }}
     >
       <input
@@ -20,7 +21,7 @@ function SearchBar(props) {
           color: props.theme.normalText,
         }}
       />
-      <Search />
+      {props.icon || <Search />}
     </div>
   );
 }
