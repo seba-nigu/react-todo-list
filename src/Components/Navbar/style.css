@@ -1,0 +1,21 @@
+.Navbar {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right-part {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+  padding: 10px;
+}
+
+.navbar-left-part {
+  width: 60%;
+}
+
+.navbar-item {
+  font-family: sans-serif;
+  cursor: pointer;
+}
