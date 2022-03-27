@@ -1,0 +1,8 @@
+.MainButton {
+  background-color: #5dc12d;
+  width: 100px;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
