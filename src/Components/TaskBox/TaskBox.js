@@ -11,7 +11,7 @@ function TaskBox(props) {
       }}
     >
       <div className="taskbox-text">{props.text}</div>
-      <div className="textbox-category">{props.category}</div>
+      <div className="taskbox-category">{props.category}</div>
     </div>
   );
 }
