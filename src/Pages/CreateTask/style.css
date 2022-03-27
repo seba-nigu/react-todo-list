@@ -17,3 +17,9 @@
   font-size: 25px;
   margin: 20px 0;
 }
+
+.create-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 400px;
+}

@@ -10,13 +10,12 @@ function TextArea(props) {
       }}
     >
       <textarea
+        placeholder=" Type..."
         className="textarea-input"
         style={{
           color: props.theme.normalText,
         }}
-      >
-        Test
-      </textarea>
+      ></textarea>
     </div>
   );
 }

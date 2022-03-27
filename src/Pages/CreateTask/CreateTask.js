@@ -1,6 +1,7 @@
 import { CalendarToday } from "@material-ui/icons";
 import React from "react";
 import Dropdown from "../../Components/Dropdown/Dropdown";
+import MainButton from "../../Components/MainButton/MainButton";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import TextArea from "../../Components/TextArea/TextArea";
 import "./style.css";
@@ -81,6 +82,13 @@ function CreateTask(props) {
             Task
           </div>
           <TextArea theme={props.theme} />
+        </div>
+        <div className="create-buttons">
+          <MainButton backgroundColor={"#E81D1D"} text={"Cancel"} />
+          <MainButton
+            backgroundColor={props.theme.mainButton}
+            text={"Submit"}
+          />
         </div>
       </div>
     </div>
