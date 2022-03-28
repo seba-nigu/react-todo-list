@@ -21,7 +21,7 @@ function SearchBar(props) {
           color: props.theme.normalText,
         }}
       />
-      {props.icon || <Search />}
+      {props.icon}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { Search } from "@material-ui/icons";
 import React from "react";
 import Dropdown from "../../Components/Dropdown/Dropdown";
 import SearchBar from "../../Components/SearchBar/SearchBar";
@@ -19,6 +20,7 @@ function MyTaks(props) {
           placeholder={"Search..."}
           width="250px"
           theme={props.theme}
+          icon={<Search />}
         />
         <Dropdown theme={props.theme} datalistName={"categories"} />
       </div>
