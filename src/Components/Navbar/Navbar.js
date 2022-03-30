@@ -84,6 +84,7 @@ function Navbar(props) {
         </Link>
 
         <AccountCircle
+          className="navbar-icon"
           style={{
             fontSize: "40px",
             cursor: "pointer",

@@ -10,3 +10,9 @@
   border: none;
   outline: none;
 }
+
+@media screen and (max-width: 850px) {
+  .Dropdown {
+    display: none !important;
+  }
+}

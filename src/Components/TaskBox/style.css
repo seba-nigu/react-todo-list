@@ -15,3 +15,11 @@
 .taskbox-category {
   text-align: end;
 }
+@media screen and (max-width: 850px) {
+  .TaskBox {
+    margin: 30px;
+    font-size: 17px;
+    height: 200px;
+    width: 250px;
+  }
+}

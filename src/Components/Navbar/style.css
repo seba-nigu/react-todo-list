@@ -29,3 +29,20 @@
 .custom-link-router {
   text-decoration: none;
 }
+
+@media screen and (max-width: 850px) {
+  .navbar-left-part {
+    width: 10%;
+  }
+  .navbar-right-part {
+    width: 90%;
+    font-size: 12px;
+    justify-content: flex-end;
+  }
+  .navbar-item {
+    margin: 0 4px;
+  }
+  .navbar-icon {
+    display: none !important;
+  }
+}

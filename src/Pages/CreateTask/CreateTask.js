@@ -20,7 +20,7 @@ function CreateTask(props) {
       <div className="task-info-container">
         <div className="task-info">
           <div
-            className="task-info-name"
+            className="task-info-name task-info1"
             style={{
               color: props.theme.normalText,
             }}
@@ -51,7 +51,7 @@ function CreateTask(props) {
           <SearchBar theme={props.theme} icon={<CalendarToday />} />
         </div>
 
-        <div className="task-info">
+        <div className="task-info task-info1">
           <div
             className="task-info-name"
             style={{

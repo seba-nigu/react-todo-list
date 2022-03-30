@@ -23,3 +23,23 @@
   justify-content: space-evenly;
   width: 400px;
 }
+
+@media screen and (max-width: 850px) {
+  .CreateTask {
+    text-align: center;
+  }
+  .task-info1 {
+    display: none;
+  }
+  .task-info {
+    width: auto;
+    justify-content: center;
+  }
+  .task-info-name {
+    margin-right: 10px;
+  }
+  .create-buttons {
+    margin: 0 auto;
+    width: auto;
+  }
+}

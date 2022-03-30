@@ -22,3 +22,18 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+@media screen and (max-width: 850px) {
+  .MyTasks {
+    text-align: center;
+  }
+  .task-boxes {
+    margin: 0 auto;
+    justify-content: center;
+  }
+  .search-area {
+    margin: 0 auto;
+    width: auto;
+    justify-content: center;
+  }
+}

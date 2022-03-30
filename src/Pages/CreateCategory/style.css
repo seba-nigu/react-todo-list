@@ -23,3 +23,20 @@
   justify-content: space-evenly;
   width: 400px;
 }
+
+@media screen and (max-width: 850px) {
+  .CreateCategory {
+    text-align: center;
+  }
+  .category-info {
+    width: auto;
+    justify-content: center;
+  }
+  .category-info-name {
+    margin-right: 10px;
+  }
+  .create-buttons {
+    margin: 0 auto;
+    width: auto;
+  }
+}

@@ -6,3 +6,10 @@
   cursor: pointer;
   font-family: sans-serif;
 }
+
+@media screen and (max-width: 850px) {
+  .MainButton {
+    width: 80px;
+    padding: 5px;
+  }
+}
