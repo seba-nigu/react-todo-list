@@ -4,9 +4,27 @@ import Dropdown from "../../Components/Dropdown/Dropdown";
 import MainButton from "../../Components/MainButton/MainButton";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import TextArea from "../../Components/TextArea/TextArea";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import "./style.css";
 
 function CreateTask(props) {
+  // somehow must take data from input and use it here
+  // also make backend and frontend more alike in regards to fields
+  function postTask() {
+    axios
+      .post("https://localhost:44351/tasks", {
+        name: "fourth react",
+        description: "fourth did something",
+        userId: 1,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   return (
     <div className="CreateTask">
       <div
@@ -84,10 +102,13 @@ function CreateTask(props) {
           <TextArea theme={props.theme} />
         </div>
         <div className="create-buttons">
-          <MainButton backgroundColor={"#E81D1D"} text={"Cancel"} />
+          <Link to="/" className="custom-link-router">
+            <MainButton backgroundColor={"#E81D1D"} text={"Cancel"} />
+          </Link>
           <MainButton
             backgroundColor={props.theme.mainButton}
             text={"Submit"}
+            handleClick={postTask}
           />
         </div>
       </div>

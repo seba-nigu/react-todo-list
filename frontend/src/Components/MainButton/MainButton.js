@@ -7,6 +7,7 @@ function MainButton(props) {
       style={{
         backgroundColor: props.backgroundColor,
       }}
+      onClick={props.handleClick}
     >
       {props.text}
     </div>

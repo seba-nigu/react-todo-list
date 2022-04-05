@@ -14,7 +14,7 @@ function Dropdown(props) {
         type="text"
         name="categories"
         list={props.datalistName}
-        autocomplete="on"
+        autoComplete="on"
         className="dropdown-input"
         style={{
           color: props.theme.normalText,
