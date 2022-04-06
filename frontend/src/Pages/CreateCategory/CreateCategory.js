@@ -6,7 +6,18 @@ import { Link } from "react-router-dom";
 import "./style.css";
 
 function CreateCategory(props) {
+  function getFormData() {
+    let name, description;
+    name = document.querySelector(".t-name").children[1].children[0].value;
+    description =
+      document.querySelector(".t-description").children[1].children[0].value;
+    return {
+      name: name,
+      description: description,
+    };
+  }
   function postCategory() {
+    let obj = getFormData();
     axios
       .post("https://localhost:44351/categories", {
         name: "react_category",
@@ -32,7 +43,7 @@ function CreateCategory(props) {
       </div>
 
       <div className="category-info-container">
-        <div className="category-info">
+        <div className="category-info t-name">
           <div
             className="category-info-name"
             style={{
@@ -43,7 +54,7 @@ function CreateCategory(props) {
           </div>
           <SearchBar theme={props.theme} />
         </div>
-        <div className="category-info">
+        <div className="category-info t-description">
           <div
             className="category-info-name"
             style={{
