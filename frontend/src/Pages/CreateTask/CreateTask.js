@@ -12,8 +12,8 @@ function CreateTask(props) {
   function postTask() {
     axios
       .post("https://localhost:44351/tasks", {
-        name: "fourth react",
-        description: "fourth did something",
+        name: "react_task",
+        description: "this is a task posted from react.",
         userId: 1,
       })
       .then(function (response) {
