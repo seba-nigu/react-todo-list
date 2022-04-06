@@ -8,37 +8,26 @@ namespace TaskManagement.WebApi.Persistance
         {
             context.Database.EnsureCreated();
 
-            if (context.Tasks.Any())
+            if (context.Users.Any())
             {
                 return;
             }
 
-            var _tasks = new List<TaskModel>()
+            var users = new List<UserModel>()
             {
-                new TaskModel
+                new UserModel()
                 {
-                    Name = "Coding",
-                    User = new()
-                    {
-                        Name = "John Doe"
-                    },
-                    Description = "Some Description"
+                    Name = "Seba"
                 },
-
-                new TaskModel
+                new UserModel()
                 {
-                    Name = "Coding Review",
-                    User = new()
-                    {
-                        Name = "Jane Doe"
-                    },
-                    Description = "Some Description"
+                    Name = "Radu"
                 }
             };
 
-            foreach (var task in _tasks)
+            foreach (var user in users)
             {
-                context.Tasks.Add(task);
+                context.Users.Add(user);
             }
 
             context.SaveChanges();

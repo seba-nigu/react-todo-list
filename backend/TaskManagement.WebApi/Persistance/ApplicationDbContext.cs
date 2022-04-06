@@ -7,10 +7,10 @@ namespace TaskManagement.WebApi.Persistance
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public DbSet<TaskModel> Tasks { get; set; }
         public DbSet<UserModel> Users { get; set; }
-        public DbSet<TaskCategoryModel> TaskCategories { get; set; }
         public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<TaskModel> Tasks { get; set; }
+        public DbSet<TaskCategoryModel> TaskCategories { get; set; }
 
         public IQueryable<TEnt> ReadSet<TEnt>() where TEnt : class
         {
@@ -19,10 +19,10 @@ namespace TaskManagement.WebApi.Persistance
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TaskModel>().ToTable("Task");
             modelBuilder.Entity<UserModel>().ToTable("User");
-            modelBuilder.Entity<TaskCategoryModel>().ToTable("TaskCategory");
             modelBuilder.Entity<CategoryModel>().ToTable("Category");
+            modelBuilder.Entity<TaskModel>().ToTable("Task");
+            modelBuilder.Entity<TaskCategoryModel>().ToTable("TaskCategory");
         }
     }
 }

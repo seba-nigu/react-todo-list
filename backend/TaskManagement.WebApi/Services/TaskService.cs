@@ -50,6 +50,8 @@ namespace TaskManagement.WebApi.Services
         {
             var task = _context.Set<TaskModel>().FirstOrDefault(x => x.Id == taskModel.Id);
             task.Name = taskModel.Name;
+            task.Description = taskModel.Description;
+            task.DateModified = DateTime.Now;
             _context.SaveChanges();
         }
     }

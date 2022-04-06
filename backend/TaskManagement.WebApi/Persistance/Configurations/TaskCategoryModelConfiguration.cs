@@ -9,14 +9,14 @@ namespace TaskManagement.WebApi.Persistance.Configurations
         public void Configure(EntityTypeBuilder<TaskCategoryModel> builder)
         {
             builder.HasOne(t => t.Category)
-                .WithMany(t => t.TaskCategory)
-                .HasForeignKey(t => t.Category.Id)
-                .HasConstraintName("FK_TaskCategory_Category");
+                   .WithMany(t => t.TaskCategory)
+                   .HasForeignKey(t => t.Category.Id)
+                   .HasConstraintName("FK_TaskCategory_Category");
 
             builder.HasOne(t => t.Task)
-                .WithMany(t => t.TaskCategory)
-                .HasForeignKey(t => t.Task.Id)
-                .HasConstraintName("FK_TaskCategory_Task");
+                   .WithMany(t => t.TaskCategory)
+                   .HasForeignKey(t => t.Task.Id)
+                   .HasConstraintName("FK_TaskCategory_Task");
         }
     }
 }
