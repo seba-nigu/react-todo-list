@@ -9,8 +9,9 @@ import "./style.css";
 function CreateTask(props) {
   function getFormData() {
     let name, description;
-    name = document.querySelector(".t-name").children[0].value;
-    description = document.querySelector(".t-description").children[0].value;
+    name = document.querySelector(".t-name").children[1].children[0].value;
+    description =
+      document.querySelector(".t-description").children[1].children[0].value;
     return {
       name: name,
       description: description,
@@ -44,7 +45,7 @@ function CreateTask(props) {
         Create Task
       </div>
       <div className="task-info-container">
-        <div className="task-info">
+        <div className="task-info t-name">
           <div
             className="task-info-name"
             style={{
@@ -53,9 +54,9 @@ function CreateTask(props) {
           >
             Name
           </div>
-          <TextArea theme={props.theme} className="t-name" />
+          <TextArea theme={props.theme} />
         </div>
-        <div className="task-info">
+        <div className="task-info t-description">
           <div
             className="task-info-name"
             style={{
@@ -64,7 +65,7 @@ function CreateTask(props) {
           >
             Description
           </div>
-          <TextArea theme={props.theme} className="t-description" />
+          <TextArea theme={props.theme} />
         </div>
         <div className="task-info">
           <div
