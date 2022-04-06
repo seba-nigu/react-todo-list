@@ -16,12 +16,13 @@ function CreateCategory(props) {
       description: description,
     };
   }
+  // when login is done, dont hardcode id
   function postCategory() {
     let obj = getFormData();
     axios
       .post("https://localhost:44351/categories", {
-        name: "react_category",
-        description: "this is a category posted from react.",
+        name: obj.name,
+        description: obj.description,
         userId: 2,
       })
       .then(function (response) {

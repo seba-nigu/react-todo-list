@@ -17,8 +17,7 @@ function CreateTask(props) {
       description: description,
     };
   }
-  // somehow must take data from input and use it here
-  // also make backend and frontend more alike in regards to fields
+  // when login is done, dont hardcode id
   function postTask() {
     let obj = getFormData();
     axios
