@@ -7,13 +7,23 @@ import axios from "axios";
 import "./style.css";
 
 function CreateTask(props) {
+  function getFormData() {
+    let name, description;
+    name = document.querySelector(".t-name").children[0].value;
+    description = document.querySelector(".t-description").children[0].value;
+    return {
+      name: name,
+      description: description,
+    };
+  }
   // somehow must take data from input and use it here
   // also make backend and frontend more alike in regards to fields
   function postTask() {
+    let obj = getFormData();
     axios
       .post("https://localhost:44351/tasks", {
-        name: "react_task",
-        description: "this is a task posted from react.",
+        name: obj.name,
+        description: obj.description,
         userId: 1,
       })
       .then(function (response) {
@@ -43,7 +53,7 @@ function CreateTask(props) {
           >
             Name
           </div>
-          <TextArea theme={props.theme} />
+          <TextArea theme={props.theme} className="t-name" />
         </div>
         <div className="task-info">
           <div
@@ -54,7 +64,7 @@ function CreateTask(props) {
           >
             Description
           </div>
-          <TextArea theme={props.theme} />
+          <TextArea theme={props.theme} className="t-description" />
         </div>
         <div className="task-info">
           <div
