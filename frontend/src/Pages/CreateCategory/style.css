@@ -1,0 +1,42 @@
+.CreateCategory {
+  font-family: sans-serif;
+  min-height: 100vh;
+  margin: 0 20px;
+}
+
+.createcategory-text {
+  font-size: 40px;
+  margin: 20px 0;
+}
+
+.category-info {
+  display: flex;
+  width: 400px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  margin: 20px 0;
+}
+
+.create-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 400px;
+}
+
+@media screen and (max-width: 850px) {
+  .CreateCategory {
+    text-align: center;
+  }
+  .category-info {
+    width: auto;
+    justify-content: center;
+  }
+  .category-info-name {
+    margin-right: 10px;
+  }
+  .create-buttons {
+    margin: 0 auto;
+    width: auto;
+  }
+}
