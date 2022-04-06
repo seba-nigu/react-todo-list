@@ -36,9 +36,9 @@ namespace TaskManagement.WebApi.Controllers
         }
 
         [HttpPut]
-        public void Put(CategoryModel categoryModel)
+        public void Put(CategoryModel category)
         {
-            _categoryService.UpdateCategory(categoryModel);
+            _categoryService.UpdateCategory(category);
         }
 
         [HttpDelete]

@@ -18,6 +18,15 @@ namespace TaskManagement.WebApi.Services
             var task = _context.Set<TaskModel>().FirstOrDefault(x => x.Id == id);
             _context.Set<TaskModel>().Remove(task);
             _context.SaveChanges();
+
+            var _user = _context.Set<UserModel>().FirstOrDefault(x => x.Id == task.UserId);
+            _user.Tasks.Remove(task);
+
+            foreach (var categoryId in task.CategoryIds)
+            {
+                var _category = _user.Categories.FirstOrDefault(x => x.Id == categoryId);
+                _category.TaskIds.Remove(task.Id);
+            }
         }
 
         public TaskModel GetTask(int id)
@@ -32,26 +41,37 @@ namespace TaskManagement.WebApi.Services
 
         public int InsertTask(TaskInsertDto input)
         {
-            var taskModel = new TaskModel
+            var task = new TaskModel
             {
                 Name = input.Name,
                 Description = input.Description,
                 UserId = input.UserId,
+                CategoryIds = input.CategoryIds,
                 DateCreated = DateTime.Now,
                 DateModified = DateTime.Now
             };
 
-            _context.Set<TaskModel>().Add(taskModel);
+            _context.Set<TaskModel>().Add(task);
             _context.SaveChanges();
-            return taskModel.Id;
+
+            var _user = _context.Set<UserModel>().FirstOrDefault(x => x.Id == input.UserId);
+            _user.Tasks.Add(task);
+
+            foreach (var categoryId in input.CategoryIds)
+            {
+                var _category = _user.Categories.FirstOrDefault(x => x.Id == categoryId);
+                _category.TaskIds.Add(task.Id);
+            }
+
+            return task.Id;
         }
 
-        public void UpdateTask(TaskModel taskModel)
+        public void UpdateTask(TaskModel task)
         {
-            var task = _context.Set<TaskModel>().FirstOrDefault(x => x.Id == taskModel.Id);
-            task.Name = taskModel.Name;
-            task.Description = taskModel.Description;
-            task.DateModified = DateTime.Now;
+            var _task = _context.Set<TaskModel>().FirstOrDefault(x => x.Id == task.Id);
+            _task.Name = task.Name;
+            _task.Description = task.Description;
+            _task.DateModified = DateTime.Now;
             _context.SaveChanges();
         }
     }

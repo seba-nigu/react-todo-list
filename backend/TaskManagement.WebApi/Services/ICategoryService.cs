@@ -8,7 +8,7 @@ namespace TaskManagement.WebApi.Services
         List<CategoryModel> GetCategories();
         CategoryModel GetCategory(int id);
         int InsertCategory(CategoryInsertDto input);
-        void UpdateCategory(CategoryModel categoryModel);
+        void UpdateCategory(CategoryModel category);
         void DeleteCategory(int id);
     }
 }
