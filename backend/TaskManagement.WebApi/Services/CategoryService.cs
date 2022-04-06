@@ -24,8 +24,8 @@ namespace TaskManagement.WebApi.Services
 
             foreach (var taskId in category.TaskIds)
             {
-                var _task = user.Tasks.FirstOrDefault(x => x.Id == taskId);
-                _task.CategoryIds.Remove(category.Id);
+                var task = user.Tasks.FirstOrDefault(x => x.Id == taskId);
+                task.CategoryIds.Remove(category.Id);
             }
         }
 
@@ -59,12 +59,12 @@ namespace TaskManagement.WebApi.Services
             return category.Id;
         }
 
-        public void UpdateCategory(CategoryModel category)
+        public void UpdateCategory(CategoryUpdateDto input)
         {
-            var _category = _context.Set<CategoryModel>().FirstOrDefault(x => x.Id == category.Id);
-            _category.Name = category.Name;
-            _category.Description = category.Description;
-            _category.DateModified = DateTime.Now;
+            var category = _context.Set<CategoryModel>().FirstOrDefault(x => x.Id == input.CategoryId);
+            category.Name = input.Name;
+            category.Description = input.Description;
+            category.DateModified = DateTime.Now;
             _context.SaveChanges();
         }
     }

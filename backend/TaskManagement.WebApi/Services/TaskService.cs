@@ -19,13 +19,13 @@ namespace TaskManagement.WebApi.Services
             _context.Set<TaskModel>().Remove(task);
             _context.SaveChanges();
 
-            var _user = _context.Set<UserModel>().FirstOrDefault(x => x.Id == task.UserId);
-            _user.Tasks.Remove(task);
+            var user = _context.Set<UserModel>().FirstOrDefault(x => x.Id == task.UserId);
+            user.Tasks.Remove(task);
 
             foreach (var categoryId in task.CategoryIds)
             {
-                var _category = _user.Categories.FirstOrDefault(x => x.Id == categoryId);
-                _category.TaskIds.Remove(task.Id);
+                var category = user.Categories.FirstOrDefault(x => x.Id == categoryId);
+                category.TaskIds.Remove(task.Id);
             }
         }
 
@@ -54,24 +54,24 @@ namespace TaskManagement.WebApi.Services
             _context.Set<TaskModel>().Add(task);
             _context.SaveChanges();
 
-            var _user = _context.Set<UserModel>().FirstOrDefault(x => x.Id == input.UserId);
-            _user.Tasks.Add(task);
+            var user = _context.Set<UserModel>().FirstOrDefault(x => x.Id == input.UserId);
+            user.Tasks.Add(task);
 
             foreach (var categoryId in input.CategoryIds)
             {
-                var _category = _user.Categories.FirstOrDefault(x => x.Id == categoryId);
-                _category.TaskIds.Add(task.Id);
+                var category = user.Categories.FirstOrDefault(x => x.Id == categoryId);
+                category.TaskIds.Add(task.Id);
             }
 
             return task.Id;
         }
 
-        public void UpdateTask(TaskModel task)
+        public void UpdateTask(TaskUpdateDto input)
         {
-            var _task = _context.Set<TaskModel>().FirstOrDefault(x => x.Id == task.Id);
-            _task.Name = task.Name;
-            _task.Description = task.Description;
-            _task.DateModified = DateTime.Now;
+            var task = _context.Set<TaskModel>().FirstOrDefault(x => x.Id == input.TaskId);
+            task.Name = task.Name;
+            task.Description = task.Description;
+            task.DateModified = DateTime.Now;
             _context.SaveChanges();
         }
     }

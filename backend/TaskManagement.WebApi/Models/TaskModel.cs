@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public ICollection<int> CategoryIds { get; set; } = new List<int>();
+        public virtual ICollection<int> CategoryIds { get; set; } = new List<int>();
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }

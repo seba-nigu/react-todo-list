@@ -36,9 +36,9 @@ namespace TaskManagement.WebApi.Controllers
         }
 
         [HttpPut]
-        public void Put(TaskModel task)
+        public void Put(TaskUpdateDto input)
         {
-            _taskService.UpdateTask(task);
+            _taskService.UpdateTask(input);
         }
 
         [HttpDelete]
