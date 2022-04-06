@@ -1,8 +1,6 @@
-import { CalendarToday } from "@material-ui/icons";
 import React from "react";
 import Dropdown from "../../Components/Dropdown/Dropdown";
 import MainButton from "../../Components/MainButton/MainButton";
-import SearchBar from "../../Components/SearchBar/SearchBar";
 import TextArea from "../../Components/TextArea/TextArea";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -43,20 +41,10 @@ function CreateTask(props) {
               color: props.theme.normalText,
             }}
           >
-            Author
+            Name
           </div>
-          <Dropdown
-            theme={props.theme}
-            datalist={
-              <datalist id="authors" className="dropdown-input">
-                <option>Seba</option>
-                <option>Radu</option>
-              </datalist>
-            }
-            datalistName={"authors"}
-          />
+          <TextArea theme={props.theme} />
         </div>
-
         <div className="task-info">
           <div
             className="task-info-name"
@@ -64,11 +52,10 @@ function CreateTask(props) {
               color: props.theme.normalText,
             }}
           >
-            Date
+            Description
           </div>
-          <SearchBar theme={props.theme} icon={<CalendarToday />} />
+          <TextArea theme={props.theme} />
         </div>
-
         <div className="task-info">
           <div
             className="task-info-name"
@@ -88,18 +75,6 @@ function CreateTask(props) {
             }
             datalistName={"categories"}
           />
-        </div>
-
-        <div className="task-info">
-          <div
-            className="task-info-name"
-            style={{
-              color: props.theme.normalText,
-            }}
-          >
-            Task
-          </div>
-          <TextArea theme={props.theme} />
         </div>
         <div className="create-buttons">
           <Link to="/" className="custom-link-router">
