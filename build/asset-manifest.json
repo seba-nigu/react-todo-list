@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-todo-list/static/css/main.5b407c04.css",
+    "main.js": "/react-todo-list/static/js/main.dd6e8c1a.js",
+    "index.html": "/react-todo-list/index.html",
+    "main.5b407c04.css.map": "/react-todo-list/static/css/main.5b407c04.css.map",
+    "main.dd6e8c1a.js.map": "/react-todo-list/static/js/main.dd6e8c1a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5b407c04.css",
+    "static/js/main.dd6e8c1a.js"
+  ]
+}
