@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using TaskManagement.WebApi.Dtos;
 using TaskManagement.WebApi.Models;
 using TaskManagement.WebApi.Persistance;
@@ -20,7 +19,7 @@ namespace TaskManagement.WebApi.Services
             var task = _context.Set<TaskModel>().FirstOrDefault(x => x.Id == id);
             _context.Set<TaskModel>().Remove(task);
 
-            var user = _context.Set<UserModel>().FirstOrDefault(x => x.Id == task.UserId);
+            var user = _context.Set<UserModel>().Include("Tasks").Include("Categories").FirstOrDefault(x => x.Id == task.UserId);
             user.Tasks.Remove(task);
 
             foreach (var categoryId in task.CategoryIds)
@@ -46,10 +45,10 @@ namespace TaskManagement.WebApi.Services
         {
             var task = new TaskModel
             {
-                Name = input.Name,
-                Description = (input.Description is null) ? string.Empty : input.Description,
                 UserId = input.UserId,
                 CategoryIds = (input.CategoryIds is null) ? new List<int>() : input.CategoryIds,
+                Name = input.Name,
+                Description = (input.Description is null) ? string.Empty : input.Description,
                 DateCreated = DateTime.Now,
                 DateModified = DateTime.Now
             };
@@ -59,7 +58,7 @@ namespace TaskManagement.WebApi.Services
             var user = _context.Set<UserModel>().Include("Tasks").Include("Categories").FirstOrDefault(x => x.Id == input.UserId);
             user.Tasks.Add(task);
 
-            foreach (var categoryId in input.CategoryIds)
+            foreach (var categoryId in task.CategoryIds)
             {
                 var category = user.Categories.FirstOrDefault(x => x.Id == categoryId);
                 category.TaskIds.Add(task.Id);

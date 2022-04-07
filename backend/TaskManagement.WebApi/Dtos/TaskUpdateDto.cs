@@ -8,6 +8,6 @@ namespace TaskManagement.WebApi.Dtos
         public int TaskId { get; set; }
         [Required]
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 }

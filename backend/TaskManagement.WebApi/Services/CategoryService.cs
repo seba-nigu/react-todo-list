@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using TaskManagement.WebApi.Dtos;
 using TaskManagement.WebApi.Models;
 using TaskManagement.WebApi.Persistance;
@@ -20,7 +19,7 @@ namespace TaskManagement.WebApi.Services
             var category = _context.Set<CategoryModel>().FirstOrDefault(x => x.Id == id);
             _context.Set<CategoryModel>().Remove(category);
 
-            var user = _context.Set<UserModel>().FirstOrDefault(x => x.Id == category.UserId);
+            var user = _context.Set<UserModel>().Include("Categories").Include("Tasks").FirstOrDefault(x => x.Id == category.UserId);
             user.Categories.Remove(category);
 
             foreach (var taskId in category.TaskIds)
@@ -46,10 +45,10 @@ namespace TaskManagement.WebApi.Services
         {
             var category = new CategoryModel
             {
-                Name = input.Name,
-                Description = input.Description,
                 UserId = input.UserId,
                 TaskIds = new List<int>(),
+                Name = input.Name,
+                Description = (input.Description is null) ? string.Empty : input.Description,
                 DateCreated = DateTime.Now,
                 DateModified = DateTime.Now
             };
@@ -67,7 +66,7 @@ namespace TaskManagement.WebApi.Services
         {
             var category = _context.Set<CategoryModel>().FirstOrDefault(x => x.Id == input.CategoryId);
             category.Name = input.Name;
-            category.Description = input.Description;
+            category.Description = (input.Description is null) ? string.Empty : input.Description;
             category.DateModified = DateTime.Now;
             _context.SaveChanges();
         }
