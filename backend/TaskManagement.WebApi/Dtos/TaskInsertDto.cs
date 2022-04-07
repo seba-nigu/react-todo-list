@@ -6,7 +6,7 @@ namespace TaskManagement.WebApi.Dtos
     {
         [Required]
         public int UserId { get; set; }
-        public ICollection<int>? CategoryIds { get; set; }
+        public int CategoryId { get; set; }
         [Required]
         public string Name { get; set; }
         public string? Description { get; set; }

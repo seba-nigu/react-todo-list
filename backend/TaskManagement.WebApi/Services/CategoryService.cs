@@ -16,29 +16,28 @@ namespace TaskManagement.WebApi.Services
 
         public void DeleteCategory(int id)
         {
-            var category = _context.Set<CategoryModel>().FirstOrDefault(x => x.Id == id);
-            _context.Set<CategoryModel>().Remove(category);
+            var category = _context.Set<CategoryModel>().Include("Tasks").FirstOrDefault(x => x.Id == id);
 
-            var user = _context.Set<UserModel>().Include("Categories").Include("Tasks").FirstOrDefault(x => x.Id == category.UserId);
+            var user = _context.Set<UserModel>().Include("Categories").FirstOrDefault(x => x.Id == category.UserId);
             user.Categories.Remove(category);
 
-            foreach (var taskId in category.TaskIds)
+            foreach (var task in category.Tasks)
             {
-                var task = user.Tasks.FirstOrDefault(x => x.Id == taskId);
-                task.CategoryIds.Remove(category.Id);
+                _context.Set<TaskModel>().Remove(task);
             }
 
+            _context.Set<CategoryModel>().Remove(category);
             _context.SaveChanges();
         }
 
         public CategoryModel GetCategory(int id)
         {
-            return _context.Set<CategoryModel>().FirstOrDefault(x => x.Id == id);
+            return _context.Set<CategoryModel>().Include("Tasks").FirstOrDefault(x => x.Id == id);
         }
 
         public List<CategoryModel> GetCategories()
         {
-            return _context.Set<CategoryModel>().ToList();
+            return _context.Set<CategoryModel>().Include("Tasks").ToList();
         }
 
         public int InsertCategory(CategoryInsertDto input)
@@ -46,7 +45,7 @@ namespace TaskManagement.WebApi.Services
             var category = new CategoryModel
             {
                 UserId = input.UserId,
-                TaskIds = new List<int>(),
+                Tasks = new List<TaskModel>(),
                 Name = input.Name,
                 Description = (input.Description is null) ? string.Empty : input.Description,
                 DateCreated = DateTime.Now,
