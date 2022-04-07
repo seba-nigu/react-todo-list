@@ -17,13 +17,15 @@ function Login(props) {
     };
   }
 
-  function postLogin() {
+  // din axios.get iei userid-ul cu care faci legatura intre toate
+  // api callurile de la categories si task
+  // da nush cum iei id response
+  function getLogin() {
     let obj = getFormData();
     axios
-      .post("https://localhost:44351/categories", {
+      .get(`https://localhost:44351/users/${obj.name}/${obj.password}`, {
         name: obj.name,
         password: obj.password,
-        userId: 2,
       })
       .then(function (response) {
         console.log(response);
@@ -76,7 +78,7 @@ function Login(props) {
           <MainButton
             backgroundColor={props.theme.mainButton}
             text={"Submit"}
-            handleClick={postLogin}
+            handleClick={getLogin}
           />
         </div>
       </div>

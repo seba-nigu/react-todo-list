@@ -83,13 +83,15 @@ function Navbar(props) {
           </div>
         </Link>
 
-        <AccountCircle
-          style={{
-            fontSize: "40px",
-            cursor: "pointer",
-            color: props.theme.normalText,
-          }}
-        />
+        <Link to="/login" className="custom-link-router">
+          <AccountCircle
+            style={{
+              fontSize: "40px",
+              cursor: "pointer",
+              color: props.theme.normalText,
+            }}
+          />
+        </Link>
       </div>
     </div>
   );

@@ -7,19 +7,29 @@ import { Link } from "react-router-dom";
 
 function Register(props) {
   function getFormData() {
-    let name, password;
+    let name, password, password2;
     name = document.querySelector(".t-name").children[1].children[0].value;
     password =
       document.querySelector(".t-password").children[1].children[0].value;
-    return {
-      name: name,
-      password: password,
-    };
+    password2 =
+      document.querySelector(".t-password2").children[1].children[0].value;
+
+    if (password === password2) {
+      alert("Registration was successful!");
+      return {
+        name: name,
+        password: password,
+      };
+    } else return null;
   }
   function postRegister() {
     let obj = getFormData();
+    if (obj === null) {
+      alert("Passwords do not match!");
+      return;
+    }
     axios
-      .post("https://localhost:44351/categories", {
+      .post("https://localhost:44351/users", {
         name: obj.name,
         password: obj.password,
         userId: 2,
