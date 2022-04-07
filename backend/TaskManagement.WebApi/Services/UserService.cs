@@ -48,9 +48,23 @@ namespace TaskManagement.WebApi.Services
             return user;
         }
 
-        public List<UserModel> GetUsers()
+        public int GetUserId(string username, string password)
         {
-            var users = _context.Set<UserModel>().AsNoTracking().Include("Categories").Include("Tasks").ToList();
+            var user = _context.Set<UserModel>().AsNoTracking().Include("Categories").Include("Tasks").FirstOrDefault(x => x.Name.Equals(username));
+            if (user is null)
+            {
+                return 0;
+            }
+            if (Hasher.CheckPassword(user.Password, password))
+            {
+                return user.Id;
+            }
+            return 0;
+        }
+
+        public HashSet<UserModel> GetUsers()
+        {
+            var users = _context.Set<UserModel>().AsNoTracking().Include("Categories").Include("Tasks").ToHashSet();
             foreach (var user in users)
             {
                 user.Password = "";
@@ -64,8 +78,8 @@ namespace TaskManagement.WebApi.Services
             {
                 Name = input.Name,
                 Password = Hasher.GetHashedPassword(input.Password),
-                Categories = new List<CategoryModel>(),
-                Tasks = new List<TaskModel>(),
+                Categories = new HashSet<CategoryModel>(),
+                Tasks = new HashSet<TaskModel>(),
                 DateCreated = DateTime.Now,
                 DateModified = DateTime.Now
             };

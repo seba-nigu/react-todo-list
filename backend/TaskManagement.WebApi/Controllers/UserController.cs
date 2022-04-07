@@ -30,6 +30,14 @@ namespace TaskManagement.WebApi.Controllers
             return (result is null) ? new EmptyResult() : result;
         }
 
+        [HttpGet]
+        [Route("{username}/{password}")]
+        public ActionResult<int> Get(string username, string password)
+        {
+            var result = _userService.GetUserId(username, password);
+            return (result == 0) ? new EmptyResult() : result;
+        }
+
         [HttpPost]
         public ActionResult<int> Post(UserInsertDto input)
         {
