@@ -17,11 +17,19 @@ namespace TaskManagement.WebApi.Persistance
             {
                 new UserModel()
                 {
-                    Name = "Seba"
+                    Name = "Seba",
+                    Tasks = new List<TaskModel>(),
+                    Categories = new List<CategoryModel>(),
+                    DateCreated = DateTime.UtcNow,
+                    DateModified = DateTime.UtcNow
                 },
                 new UserModel()
                 {
-                    Name = "Radu"
+                    Name = "Radu",
+                    Tasks = new List<TaskModel>(),
+                    Categories = new List<CategoryModel>(),
+                    DateCreated = DateTime.UtcNow,
+                    DateModified = DateTime.UtcNow
                 }
             };
 

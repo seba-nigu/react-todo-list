@@ -34,7 +34,7 @@ namespace TaskManagement.WebApi.Persistance
 
             modelBuilder.Entity<UserModel>().ToTable("User");
             modelBuilder.Entity<CategoryModel>().ToTable("Category");
-            modelBuilder.Entity<CategoryModel>().ToTable("Task");
+            modelBuilder.Entity<TaskModel>().ToTable("Task");
         }
     }
 }

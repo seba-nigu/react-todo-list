@@ -1,4 +1,6 @@
-﻿using TaskManagement.WebApi.Dtos;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using TaskManagement.WebApi.Dtos;
 using TaskManagement.WebApi.Models;
 using TaskManagement.WebApi.Persistance;
 
@@ -17,16 +19,17 @@ namespace TaskManagement.WebApi.Services
         {
             var category = _context.Set<CategoryModel>().FirstOrDefault(x => x.Id == id);
             _context.Set<CategoryModel>().Remove(category);
-            _context.SaveChanges();
 
             var user = _context.Set<UserModel>().FirstOrDefault(x => x.Id == category.UserId);
             user.Categories.Remove(category);
 
             foreach (var taskId in category.TaskIds)
             {
-                var _task = user.Tasks.FirstOrDefault(x => x.Id == taskId);
-                _task.CategoryIds.Remove(category.Id);
+                var task = user.Tasks.FirstOrDefault(x => x.Id == taskId);
+                task.CategoryIds.Remove(category.Id);
             }
+
+            _context.SaveChanges();
         }
 
         public CategoryModel GetCategory(int id)
@@ -46,25 +49,26 @@ namespace TaskManagement.WebApi.Services
                 Name = input.Name,
                 Description = input.Description,
                 UserId = input.UserId,
+                TaskIds = new List<int>(),
                 DateCreated = DateTime.Now,
                 DateModified = DateTime.Now
             };
 
             _context.Set<CategoryModel>().Add(category);
-            _context.SaveChanges();
 
-            var user = _context.Set<UserModel>().FirstOrDefault(x => x.Id == input.UserId);
+            var user = _context.Set<UserModel>().Include("Categories").FirstOrDefault(x => x.Id == input.UserId);
             user.Categories.Add(category);
 
+            _context.SaveChanges();
             return category.Id;
         }
 
-        public void UpdateCategory(CategoryModel category)
+        public void UpdateCategory(CategoryUpdateDto input)
         {
-            var _category = _context.Set<CategoryModel>().FirstOrDefault(x => x.Id == category.Id);
-            _category.Name = category.Name;
-            _category.Description = category.Description;
-            _category.DateModified = DateTime.Now;
+            var category = _context.Set<CategoryModel>().FirstOrDefault(x => x.Id == input.CategoryId);
+            category.Name = input.Name;
+            category.Description = input.Description;
+            category.DateModified = DateTime.Now;
             _context.SaveChanges();
         }
     }

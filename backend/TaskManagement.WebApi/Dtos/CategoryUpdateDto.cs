@@ -2,13 +2,12 @@
 
 namespace TaskManagement.WebApi.Dtos
 {
-    public class TaskInsertDto
+    public class CategoryUpdateDto
     {
+        [Required]
+        public int CategoryId { get; set; }
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
-        [Required]
-        public int UserId { get; set; }
-        public ICollection<int> CategoryIds { get; set; }
     }
 }
