@@ -6,9 +6,9 @@ namespace TaskManagement.WebApi.Services
     public interface IUserService
     {
         List<UserModel> GetUsers();
-        UserModel GetUser(int id);
+        UserModel? GetUser(int id);
         int InsertUser(UserInsertDto input);
-        void UpdateUser(UserUpdateDto input);
-        void DeleteUser(int id);
+        int UpdateUser(UserUpdateDto input);
+        int DeleteUser(int id);
     }
 }

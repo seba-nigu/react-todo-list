@@ -26,26 +26,30 @@ namespace TaskManagement.WebApi.Controllers
         [Route("{categoryId}")]
         public ActionResult<CategoryModel> Get(int categoryId)
         {
-            return _categoryService.GetCategory(categoryId);
+            var result = _categoryService.GetCategory(categoryId);
+            return (result is null) ? new EmptyResult() : result;
         }
 
         [HttpPost]
         public ActionResult<int> Post(CategoryInsertDto input)
         {
-            return _categoryService.InsertCategory(input);
+            var result = _categoryService.InsertCategory(input);
+            return (result == 0) ? new EmptyResult() : result;
         }
 
         [HttpPut]
-        public void Put(CategoryUpdateDto input)
+        public ActionResult<int> Put(CategoryUpdateDto input)
         {
-            _categoryService.UpdateCategory(input);
+            var result = _categoryService.UpdateCategory(input);
+            return (result == 0) ? new EmptyResult() : result;
         }
 
         [HttpDelete]
         [Route("{categoryId}")]
-        public void Delete(int categoryId)
+        public ActionResult<int> Delete(int categoryId)
         {
-            _categoryService.DeleteCategory(categoryId);
+            var result = _categoryService.DeleteCategory(categoryId);
+            return (result == 0) ? new EmptyResult() : result;
         }
     }
 }

@@ -26,7 +26,8 @@ namespace TaskManagement.WebApi.Controllers
         [Route("{userId}")]
         public ActionResult<UserModel> Get(int userId)
         {
-            return _userService.GetUser(userId);
+            var result = _userService.GetUser(userId);
+            return (result is null) ? new EmptyResult() : result;
         }
 
         [HttpPost]
@@ -36,16 +37,30 @@ namespace TaskManagement.WebApi.Controllers
         }
 
         [HttpPut]
-        public void Put(UserUpdateDto input)
+        public ActionResult<int> Put(UserUpdateDto input)
         {
-            _userService.UpdateUser(input);
+            var result = _userService.UpdateUser(input);
+            if (result == 0)
+            {
+                return new ForbidResult();
+            }
+            if (result < 0)
+            {
+                return new EmptyResult();
+            }
+            return result;
         }
 
         [HttpDelete]
         [Route("{userId}")]
-        public void Delete(int userId)
+        public ActionResult<int> Delete(int userId)
         {
-            _userService.DeleteUser(userId);
+            var result = _userService.DeleteUser(userId);
+            if (result < 0)
+            {
+                return new EmptyResult();
+            }
+            return result;
         }
     }
 }

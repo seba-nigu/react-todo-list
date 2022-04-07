@@ -15,9 +15,13 @@ namespace TaskManagement.WebApi.Services
             _context = context;
         }
 
-        public void DeleteUser(int id)
+        public int DeleteUser(int id)
         {
             var user = _context.Set<UserModel>().Include("Categories").Include("Tasks").FirstOrDefault(x => x.Id == id);
+            if (user is null)
+            {
+                return -1;
+            }
 
             foreach (var category in user.Categories)
             {
@@ -30,16 +34,28 @@ namespace TaskManagement.WebApi.Services
 
             _context.Set<UserModel>().Remove(user);
             _context.SaveChanges();
+            return id;
         }
 
-        public UserModel GetUser(int id)
+        public UserModel? GetUser(int id)
         {
-            return _context.Set<UserModel>().Include("Categories").Include("Tasks").FirstOrDefault(x => x.Id == id);
+            var user = _context.Set<UserModel>().AsNoTracking().Include("Categories").Include("Tasks").FirstOrDefault(x => x.Id == id);
+            if (user is null)
+            {
+                return null;
+            }
+            user.Password = "";
+            return user;
         }
 
         public List<UserModel> GetUsers()
         {
-            return _context.Set<UserModel>().Include("Categories").Include("Tasks").ToList();
+            var users = _context.Set<UserModel>().AsNoTracking().Include("Categories").Include("Tasks").ToList();
+            foreach (var user in users)
+            {
+                user.Password = "";
+            }
+            return users;
         }
 
         public int InsertUser(UserInsertDto input)
@@ -60,21 +76,24 @@ namespace TaskManagement.WebApi.Services
             return user.Id;
         }
 
-        public void UpdateUser(UserUpdateDto input)
+        public int UpdateUser(UserUpdateDto input)
         {
             var user = _context.Set<UserModel>().FirstOrDefault(x => x.Id == input.UserId);
+            if (user is null)
+            {
+                return -1;
+            }
 
-
-            // !!!HERE!!!
             if (!Hasher.CheckPassword(user.Password, input.OldPassword))
             {
-                throw new Exception();
+                return 0;
             }
 
             user.Name = input.Name;
             user.Password = Hasher.GetHashedPassword(input.NewPassword);
             user.DateModified = DateTime.Now;
             _context.SaveChanges();
+            return user.Id;
         }
     }
 }

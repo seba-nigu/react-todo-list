@@ -14,7 +14,7 @@ namespace TaskManagement.WebApi.PasswordHashing
             var algorithm = new Rfc2898DeriveBytes(password,
                                                    SaltSize,
                                                    Iterations,
-                                                   HashAlgorithmName.SHA256);
+                                                   HashAlgorithmName.SHA512);
 
             var key = Convert.ToBase64String(algorithm.GetBytes(KeySize));
             var salt = Convert.ToBase64String(algorithm.Salt);

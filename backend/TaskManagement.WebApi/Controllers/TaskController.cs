@@ -26,26 +26,30 @@ namespace TaskManagement.WebApi.Controllers
         [Route("{taskId}")]
         public ActionResult<TaskModel> Get(int taskId)
         {
-            return _taskService.GetTask(taskId);
+            var result = _taskService.GetTask(taskId);
+            return (result is null) ? new EmptyResult() : result;
         }
 
         [HttpPost]
         public ActionResult<int> Post(TaskInsertDto input)
         {
-            return _taskService.InsertTask(input);
+            var result = _taskService.InsertTask(input);
+            return (result == 0) ? new EmptyResult() : result;
         }
 
         [HttpPut]
-        public void Put(TaskUpdateDto input)
+        public ActionResult<int> Put(TaskUpdateDto input)
         {
-            _taskService.UpdateTask(input);
+            var result = _taskService.UpdateTask(input);
+            return (result == 0) ? new EmptyResult() : result;
         }
 
         [HttpDelete]
         [Route("{taskId}")]
-        public void Delete(int taskId)
+        public ActionResult<int> Delete(int taskId)
         {
-            _taskService.DeleteTask(taskId);
+            var result = _taskService.DeleteTask(taskId);
+            return (result == 0) ? new EmptyResult() : result;
         }
     }
 }
