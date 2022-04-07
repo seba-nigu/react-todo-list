@@ -5,7 +5,7 @@ namespace TaskManagement.WebApi.Services
 {
     public interface ICategoryService
     {
-        List<CategoryModel> GetCategories();
+        HashSet<CategoryModel> GetCategories();
         CategoryModel? GetCategory(int id);
         int InsertCategory(CategoryInsertDto input);
         int UpdateCategory(CategoryUpdateDto input);

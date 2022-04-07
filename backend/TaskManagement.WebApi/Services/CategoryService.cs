@@ -44,9 +44,9 @@ namespace TaskManagement.WebApi.Services
             return _context.Set<CategoryModel>().Include("Tasks").FirstOrDefault(x => x.Id == id);
         }
 
-        public List<CategoryModel> GetCategories()
+        public HashSet<CategoryModel> GetCategories()
         {
-            return _context.Set<CategoryModel>().Include("Tasks").ToList();
+            return _context.Set<CategoryModel>().Include("Tasks").ToHashSet();
         }
 
         public int InsertCategory(CategoryInsertDto input)
@@ -54,7 +54,7 @@ namespace TaskManagement.WebApi.Services
             var category = new CategoryModel
             {
                 UserId = input.UserId,
-                Tasks = new List<TaskModel>(),
+                Tasks = new HashSet<TaskModel>(),
                 Name = input.Name,
                 Description = (input.Description is null) ? string.Empty : input.Description,
                 DateCreated = DateTime.Now,
