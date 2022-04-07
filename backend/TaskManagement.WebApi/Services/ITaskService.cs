@@ -8,7 +8,7 @@ namespace TaskManagement.WebApi.Services
         List<TaskModel> GetTasks();
         TaskModel GetTask(int id);
         int InsertTask(TaskInsertDto input);
-        void UpdateTask(TaskUpdateDto task);
+        void UpdateTask(TaskUpdateDto input);
         void DeleteTask(int id);
     }
 }
