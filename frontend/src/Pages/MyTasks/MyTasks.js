@@ -18,7 +18,7 @@ function MyTaks(props) {
     let children = element.children;
     for (let i = 0; i < children.length; i++) {
       let childText = children[i].children[0].innerText;
-      if (input != "") {
+      if (input !== "") {
         if (childText !== input) {
           children[i].style.display = "none";
         } else {
