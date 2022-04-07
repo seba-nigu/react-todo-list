@@ -1,0 +1,42 @@
+.Register {
+  font-family: sans-serif;
+  min-height: 100vh;
+  margin: 0 20px;
+}
+
+.register-text {
+  font-size: 40px;
+  margin: 20px 0;
+}
+
+.register-info {
+  display: flex;
+  width: 400px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  margin: 20px 0;
+}
+
+.create-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 400px;
+}
+
+@media screen and (max-width: 850px) {
+  .Register {
+    text-align: center;
+  }
+  .register-info {
+    width: auto;
+    justify-content: center;
+  }
+  .register-info-name {
+    margin-right: 10px;
+  }
+  .create-buttons {
+    margin: 0 auto;
+    width: auto;
+  }
+}
