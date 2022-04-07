@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Newtonsoft.Json;
 using TaskManagement.WebApi.Models;
 
 namespace TaskManagement.WebApi.Persistance
@@ -20,18 +18,6 @@ namespace TaskManagement.WebApi.Persistance
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CategoryModel>()
-                .Property(x => x.TaskIds)
-                .HasConversion(new ValueConverter<ICollection<int>, string>(
-                    v => JsonConvert.SerializeObject(v),
-                    v => JsonConvert.DeserializeObject<ICollection<int>>(v)));
-
-            modelBuilder.Entity<TaskModel>()
-                .Property(x => x.CategoryIds)
-                .HasConversion(new ValueConverter<ICollection<int>, string>(
-                    v => JsonConvert.SerializeObject(v),
-                    v => JsonConvert.DeserializeObject<ICollection<int>>(v)));
-
             modelBuilder.Entity<UserModel>().ToTable("User");
             modelBuilder.Entity<CategoryModel>().ToTable("Category");
             modelBuilder.Entity<TaskModel>().ToTable("Task");

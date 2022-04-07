@@ -17,17 +17,14 @@ namespace TaskManagement.WebApi.Services
         public void DeleteTask(int id)
         {
             var task = _context.Set<TaskModel>().FirstOrDefault(x => x.Id == id);
-            _context.Set<TaskModel>().Remove(task);
 
             var user = _context.Set<UserModel>().Include("Tasks").Include("Categories").FirstOrDefault(x => x.Id == task.UserId);
             user.Tasks.Remove(task);
 
-            foreach (var categoryId in task.CategoryIds)
-            {
-                var category = user.Categories.FirstOrDefault(x => x.Id == categoryId);
-                category.TaskIds.Remove(task.Id);
-            }
+            var category = user.Categories.FirstOrDefault(x => x.Id == task.CategoryId);
+            category.Tasks.Remove(task);
 
+            _context.Set<TaskModel>().Remove(task);
             _context.SaveChanges();
         }
 
@@ -46,24 +43,23 @@ namespace TaskManagement.WebApi.Services
             var task = new TaskModel
             {
                 UserId = input.UserId,
-                CategoryIds = (input.CategoryIds is null) ? new List<int>() : input.CategoryIds,
+                CategoryId = input.CategoryId,
                 Name = input.Name,
                 Description = (input.Description is null) ? string.Empty : input.Description,
                 DateCreated = DateTime.Now,
                 DateModified = DateTime.Now
             };
 
-            _context.Set<TaskModel>().Add(task);
-
-            var user = _context.Set<UserModel>().Include("Tasks").Include("Categories").FirstOrDefault(x => x.Id == input.UserId);
+            var user = _context.Set<UserModel>().Include("Categories").Include("Tasks").FirstOrDefault(x => x.Id == input.UserId);
             user.Tasks.Add(task);
 
-            foreach (var categoryId in task.CategoryIds)
+            if (input.CategoryId != default)
             {
-                var category = user.Categories.FirstOrDefault(x => x.Id == categoryId);
-                category.TaskIds.Add(task.Id);
+                var category = _context.Set<CategoryModel>().Include("Tasks").FirstOrDefault(x => x.Id == input.CategoryId);
+                category.Tasks.Add(task);
             }
 
+            _context.Set<TaskModel>().Add(task);
             _context.SaveChanges();
             return task.Id;
         }
