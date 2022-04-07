@@ -23,7 +23,7 @@ function CreateCategory(props) {
       .post("https://localhost:44351/categories", {
         name: obj.name,
         description: obj.description,
-        userId: 2,
+        userId: 1,
       })
       .then(function (response) {
         console.log(response);

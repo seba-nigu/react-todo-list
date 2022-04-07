@@ -45,6 +45,14 @@ function MyTaks(props) {
     getTask();
   }, []);
 
+  function getCategoryName(categoryId) {
+    axios
+      .get(`https://localhost:44351/categories/${categoryId}`, categoryId)
+      .then(function (response) {
+        return response.data.name;
+      });
+  }
+
   return (
     <div className="MyTasks">
       <div
@@ -73,7 +81,7 @@ function MyTaks(props) {
             {tasks.map((task) => (
               <TaskBox
                 text={task.name}
-                category="Work"
+                category={getCategoryName(task.categoryId)}
                 theme={props.theme}
                 key={task.id}
               />

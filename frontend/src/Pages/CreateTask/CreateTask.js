@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Dropdown from "../../Components/Dropdown/Dropdown";
 import MainButton from "../../Components/MainButton/MainButton";
 import TextArea from "../../Components/TextArea/TextArea";
@@ -7,23 +7,47 @@ import axios from "axios";
 import "./style.css";
 
 function CreateTask(props) {
+  const [categories, setCategories] = useState([]);
+
+  function getCategories() {
+    axios
+      .get("https://localhost:44351/categories")
+      .then(function (response) {
+        setCategories(response.data.filter((x) => x.userId === 1));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   function getFormData() {
-    let name, description;
+    let name, description, categoryId;
     name = document.querySelector(".t-name").children[1].children[0].value;
     description =
       document.querySelector(".t-description").children[1].children[0].value;
+    categoryId = categories.find(
+      (x) =>
+        x.name ===
+        document.querySelector(".t-categoryId").children[1].children[0].value
+    ).id;
     return {
       name: name,
       description: description,
+      categoryId: categoryId,
     };
   }
-  // when login is done, dont hardcode id
+
   function postTask() {
     let obj = getFormData();
     axios
       .post("https://localhost:44351/tasks", {
         name: obj.name,
         description: obj.description,
+        categoryId: obj.categoryId,
         userId: 1,
       })
       .then(function (response) {
@@ -67,7 +91,7 @@ function CreateTask(props) {
           </div>
           <TextArea theme={props.theme} />
         </div>
-        <div className="task-info">
+        <div className="task-info t-categoryId">
           <div
             className="task-info-name"
             style={{
@@ -77,11 +101,13 @@ function CreateTask(props) {
             Category
           </div>
           <Dropdown
+            handleClick={getCategories}
             theme={props.theme}
             datalist={
               <datalist id="categories" className="dropdown-input">
-                <option>Work</option>
-                <option>Homework</option>
+                {categories.map((c) => (
+                  <option value={c.name}></option>
+                ))}
               </datalist>
             }
             datalistName={"categories"}

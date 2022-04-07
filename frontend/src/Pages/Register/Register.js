@@ -32,7 +32,7 @@ function Register(props) {
       .post("https://localhost:44351/users", {
         name: obj.name,
         password: obj.password,
-        userId: 2,
+        userId: 1,
       })
       .then(function (response) {
         console.log(response);

@@ -11,6 +11,7 @@ function Dropdown(props) {
       }}
     >
       <input
+        onClick={props.handleClick}
         type="text"
         name="categories"
         list={props.datalistName}
@@ -20,12 +21,7 @@ function Dropdown(props) {
           color: props.theme.normalText,
         }}
       />
-      {props.datalist || (
-        <datalist id="categories" className="dropdown-input">
-          <option>Work</option>
-          <option>Homework</option>
-        </datalist>
-      )}
+      {props.datalist}
     </div>
   );
 }
