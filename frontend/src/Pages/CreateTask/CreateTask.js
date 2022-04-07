@@ -28,6 +28,7 @@ function CreateTask(props) {
       })
       .then(function (response) {
         console.log(response);
+        window.location = "/";
       })
       .catch(function (error) {
         console.log(error);
