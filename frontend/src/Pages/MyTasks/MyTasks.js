@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import TaskBox from "../../Components/TaskBox/TaskBox";
 import MainButton from "../../Components/MainButton/MainButton";
-
 import "./style.css";
-import axios from "axios";
 
 function MyTaks(props) {
   const [tasks, setTasks] = useState([]);
@@ -44,15 +43,6 @@ function MyTaks(props) {
   useEffect(() => {
     getTask();
   }, []);
-
-  function getCategoryName(categoryId) {
-    axios
-      .get(`https://localhost:44351/categories/${categoryId}`, categoryId)
-      .then(function (response) {
-        return response.data.name;
-      });
-  }
-
   return (
     <div className="MyTasks">
       <div
@@ -81,9 +71,9 @@ function MyTaks(props) {
             {tasks.map((task) => (
               <TaskBox
                 text={task.name}
-                category={getCategoryName(task.categoryId)}
                 theme={props.theme}
                 key={task.id}
+                test={task.categoryId}
               />
             ))}
           </>
