@@ -3,13 +3,13 @@ using System.Security.Cryptography;
 
 namespace TaskManagement.WebApi.PasswordHashing
 {
-    public static class Hasher
+    public class Hasher : IHasher
     {
         private const int SaltSize = 16; // 128 bit 
         private const int KeySize = 32;  // 256 bit
         private const int Iterations = 1000;
 
-        public static string GetHashedPassword(string password)
+        public string GetHashedPassword(string password)
         {
             var algorithm = new Rfc2898DeriveBytes(password,
                                                    SaltSize,
@@ -22,7 +22,7 @@ namespace TaskManagement.WebApi.PasswordHashing
             return $"{Iterations}.{salt}.{key}";
         }
 
-        public static bool CheckPassword(string hash, string password)
+        public bool CheckPassword(string hash, string password)
         {
             var parts = hash.Split('.', 3);
 

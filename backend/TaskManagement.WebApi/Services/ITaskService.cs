@@ -5,7 +5,7 @@ namespace TaskManagement.WebApi.Services
 {
     public interface ITaskService
     {
-        HashSet<TaskModel> GetTasks();
+        List<TaskModel> GetTasks();
         TaskModel? GetTask(int id);
         int InsertTask(TaskInsertDto input);
         int UpdateTask(TaskUpdateDto input);

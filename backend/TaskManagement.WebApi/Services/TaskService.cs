@@ -46,9 +46,9 @@ namespace TaskManagement.WebApi.Services
             return _context.Set<TaskModel>().FirstOrDefault(x => x.Id == id);
         }
 
-        public HashSet<TaskModel> GetTasks()
+        public List<TaskModel> GetTasks()
         {
-            return _context.Set<TaskModel>().ToHashSet();
+            return _context.Set<TaskModel>().ToList();
         }
 
         public int InsertTask(TaskInsertDto input)

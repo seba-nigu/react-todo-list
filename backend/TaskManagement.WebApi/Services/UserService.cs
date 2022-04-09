@@ -9,6 +9,7 @@ namespace TaskManagement.WebApi.Services
     public class UserService : IUserService
     {
         private readonly IApplicationDbContext _context;
+        private readonly IHasher _hasher = new Hasher();
 
         public UserService(IApplicationDbContext context)
         {
@@ -55,16 +56,16 @@ namespace TaskManagement.WebApi.Services
             {
                 return 0;
             }
-            if (Hasher.CheckPassword(user.Password, password))
+            if (_hasher.CheckPassword(user.Password, password))
             {
                 return user.Id;
             }
             return 0;
         }
 
-        public HashSet<UserModel> GetUsers()
+        public List<UserModel> GetUsers()
         {
-            var users = _context.Set<UserModel>().AsNoTracking().Include("Categories").Include("Tasks").ToHashSet();
+            var users = _context.Set<UserModel>().AsNoTracking().Include("Categories").Include("Tasks").ToList();
             foreach (var user in users)
             {
                 user.Password = "";
@@ -77,9 +78,9 @@ namespace TaskManagement.WebApi.Services
             var user = new UserModel
             {
                 Name = input.Name,
-                Password = Hasher.GetHashedPassword(input.Password),
-                Categories = new HashSet<CategoryModel>(),
-                Tasks = new HashSet<TaskModel>(),
+                Password = _hasher.GetHashedPassword(input.Password),
+                Categories = new List<CategoryModel>(),
+                Tasks = new List<TaskModel>(),
                 DateCreated = DateTime.Now,
                 DateModified = DateTime.Now
             };
@@ -98,13 +99,13 @@ namespace TaskManagement.WebApi.Services
                 return -1;
             }
 
-            if (!Hasher.CheckPassword(user.Password, input.OldPassword))
+            if (!_hasher.CheckPassword(user.Password, input.OldPassword))
             {
                 return 0;
             }
 
             user.Name = input.Name;
-            user.Password = Hasher.GetHashedPassword(input.NewPassword);
+            user.Password = _hasher.GetHashedPassword(input.NewPassword);
             user.DateModified = DateTime.Now;
             _context.SaveChanges();
             return user.Id;
