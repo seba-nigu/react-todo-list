@@ -1,6 +1,6 @@
 export const lightTheme = {
-  mainButton: "#5DC12D",
-  normalText: "#037971",
+  mainButton: "#deda71",
+  normalText: "#d47982",
   white: "white",
   black: "black",
   background: "white",
@@ -8,8 +8,8 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  mainButton: "#456C55",
-  normalText: "#47A8BD",
+  mainButton: "#735c9e",
+  normalText: "#679985",
   white: "white",
   black: "black",
   background: "#222222",
