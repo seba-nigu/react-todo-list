@@ -35,7 +35,7 @@ namespace TaskManagement.WebApi.Controllers
         public ActionResult<int> Get(string username, string password)
         {
             var result = _userService.GetUserId(username, password);
-            return (result == 0) ? new EmptyResult() : result;
+            return (result == 0) ? Unauthorized("Wrong username or password!") : result;
         }
 
         [HttpPost]

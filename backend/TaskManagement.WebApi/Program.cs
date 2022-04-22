@@ -40,6 +40,8 @@ using (var scope = app.Services.CreateScope())
 
 app.UseHttpsRedirection();
 
+app.UseHsts();
+
 app.UseCors(cors => cors.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
 app.UseAuthorization();
